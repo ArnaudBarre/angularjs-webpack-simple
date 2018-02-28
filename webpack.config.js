@@ -10,12 +10,12 @@ module.exports = {
       {
         test: /\.(png|jpg|jpeg|gif|svg|woff|woff2|ttf|eot)$/,
         loader: 'file-loader',
-        options: { name: '[name].[ext]?[hash]' }
-      }
-    ]
+        options: { name: '[name].[ext]?[hash]' },
+      },
+    ],
   },
   devServer: {
     historyApiFallback: true,
-    overlay: true
-  }
-}
+    overlay: true,
+  },
+};

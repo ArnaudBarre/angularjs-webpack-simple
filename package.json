@@ -7,7 +7,7 @@
   "scripts": {
     "start": "webpack-dev-server --mode development --open --hot",
     "build": "webpack --mode production",
-    "lint": "eslint --fix ./src"
+    "lint": "eslint --fix ./src webpack.config.js"
   },
   "dependencies": {
     "@uirouter/angularjs": "^1.0.15",
