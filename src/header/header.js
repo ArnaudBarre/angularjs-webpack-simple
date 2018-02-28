@@ -1,7 +1,7 @@
 import template from './header.html';
 
 const props = {
-  text: '<'
+  text: '<',
 };
 
 export default { template, bindings: props, controllerAs: 'props' };

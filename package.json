@@ -6,7 +6,8 @@
   "license": "MIT",
   "scripts": {
     "start": "webpack-dev-server --mode development --open --hot",
-    "build": "webpack --mode production"
+    "build": "webpack --mode production",
+    "lint": "eslint --fix ./src"
   },
   "dependencies": {
     "@uirouter/angularjs": "^1.0.15",
@@ -27,11 +28,29 @@
     "babel-plugin-angularjs-annotate": "^0.8.2",
     "babel-preset-env": "^1.6.1",
     "css-loader": "^0.28.10",
+    "eslint": "^4.18.1",
+    "eslint-config-airbnb-base": "^12.1.0",
+    "eslint-plugin-import": "^2.9.0",
     "file-loader": "^1.1.10",
     "html-loader": "^0.5.5",
     "style-loader": "^0.20.2",
     "webpack": "^4.0.1",
     "webpack-cli": "^2.0.9",
     "webpack-dev-server": "^3.1.0"
+  },
+  "eslintConfig": {
+    "extends": "airbnb-base",
+    "rules": {
+      "no-param-reassign": [
+        "error",
+        {
+          "props": true,
+          "ignorePropertyModificationsFor": [
+            "$scope",
+            "$rootScope"
+          ]
+        }
+      ]
+    }
   }
 }

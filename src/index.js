@@ -21,17 +21,17 @@ export default angular.module('awesome-app', [uirouter])
       url: '/',
       component: 'home',
       resolve: {
-        messageFromParent: () => 'Hi from router :)'
-      }
+        messageFromParent: () => 'Hi from router :)',
+      },
     }).state({
       name: 'page2',
       url: '/page2',
       component: 'page2',
       resolve: {
-        title: service => service.getTitle()
-      }
+        title: () => service.getTitle(),
+      },
     });
   })
-  .run($rootScope => {
-    $rootScope.headerText = 'Hi from $rootScope'
-  })
+  .run(($rootScope) => {
+    $rootScope.headerText = 'Hi from $rootScope';
+  });
