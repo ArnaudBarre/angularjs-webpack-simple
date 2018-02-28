@@ -1,7 +1,7 @@
 {
   "name": "angularjs-webpack-simple",
   "description": "A simple boilerplate for angularjs using webapck and components",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "author": "Arnaud Barré <arnaudbarremn@gamail.com>",
   "license": "MIT",
   "scripts": {
@@ -10,8 +10,8 @@
     "lint": "eslint --fix ./src webpack.config.js"
   },
   "dependencies": {
-    "@uirouter/angularjs": "^1.0.15",
     "angular": "^1.6.9",
+    "angular-route": "^1.6.9",
     "bootstrap": "^4.0.0"
   },
   "babel": {

@@ -1,5 +1,5 @@
 import angular from 'angular';
-import uirouter from '@uirouter/angularjs';
+import ngRoute from 'angular-route';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -8,29 +8,17 @@ import home from './home/home';
 import header from './header/header';
 import page2 from './page2/page2';
 
-export default angular.module('awesome-app', [uirouter])
+export default angular.module('awesome-app', [ngRoute])
   .service('service', service)
   .component('home', home)
   .component('header', header)
   .component('page2', page2)
-  .config(($urlRouterProvider, $locationProvider, $stateProvider) => {
+  .config(($locationProvider, $routeProvider) => {
     $locationProvider.html5Mode(true);
-    $urlRouterProvider.otherwise('/');
-    $stateProvider.state({
-      name: 'home',
-      url: '/',
-      component: 'home',
-      resolve: {
-        messageFromParent: () => 'Hi from router :)',
-      },
-    }).state({
-      name: 'page2',
-      url: '/page2',
-      component: 'page2',
-      resolve: {
-        title: () => service.getTitle(),
-      },
-    });
+    $routeProvider
+      .when('/', { template: '<home message-from-parent="\'Hi from router:)\'"></home>' })
+      .when('/page2', { template: '<page-2></page-2>' })
+      .otherwise('/');
   })
   .run(($rootScope) => {
     $rootScope.headerText = 'Hi from $rootScope';

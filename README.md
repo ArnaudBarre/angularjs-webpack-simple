@@ -34,7 +34,7 @@ function controller($scope) {
   '<' : One-way data-binding : A change in child will NOT reflect in parent
 */
 const props = {
-  messageFromParent: '<'
+  messageFromParent: '<',
 };
 
 // Export of the component
@@ -66,14 +66,10 @@ You can use it in other components or in index.html :
 or as the main component of a route : 
 
 ```javascript
-$stateProvider
-  // other states
-  .state('newState', {
-    url: '/newState',
-    component: 'newComponent',
-    resolve: { // Here props are evaluate only once
-      messageFromParent: () => 'Hi from router :)'
-    }
+$routeProvider
+  // other routes
+  .when('/newRoute', { 
+    template: '<new-component message-from-parent="\'Hi from router :)\'"></new-component>'
   })
 ```
 
@@ -88,10 +84,10 @@ The angularjs $rootScope is very good way to get a store in our app. It's initia
 ```javascript
 /* @ngInject */
 export default function ($http) {
-  this.getUser = () => $http.get('myWebservice')
+  this.getUser = id => $http.get(`myWebservice/users/${id}`);
 }
 ```
-Three things are important here to get the service working : 
+Two things are important here to get the service working : 
 * Annotate the function with `/* @ngInject */`
 * Not use the arrow function syntax for the global function
 
@@ -112,17 +108,15 @@ export default angular.module('awesome-app', [/* dependencies */])
 
 #### Use it
 
-The service can now be used in a controller or to resolve a property in the router :
+The service can now be used in a controller. If a prop is needed to call the service, put the call in the $onInit method :
 
 ```javascript
-$stateProvider
-  // other states
-  .state({
-    // state properties
-    resolve: {
-      user: newService => newService.getUser()
-    }
-  });
+ this.$onInit = () => {
+    service.getUser($scope.props.userId)
+      .then((user) => {
+        $scope.user = user;
+      });
+  };
 ```
 
 ## Webpack tips
