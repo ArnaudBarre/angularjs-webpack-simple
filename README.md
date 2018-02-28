@@ -10,15 +10,9 @@ These boilerplate is based on the component approach added in angularjs 1.5, a f
 
 Create a new folder in src named newComponent with an .html, a .js and a .css file (if needed)
 
-```css
-.blue {
-    color: blue
-}
-```
-
 ```html
 <div class="jumbotron">
-  <h1 class="blue">{{message}}</h1>
+  <h1 class="text-primary">{{message}}</h1>
   <h3>{{props.messageFromParent}}</h3>
 </div>
 <button class="btn btn-primary" ng-click="changeMessage()">Change</button>
@@ -137,7 +131,7 @@ A change in index.html is not detected and you need to refresh the page manually
 
 If you need to call a webservice, you can setup a proxy in the devServer configs. See [docs here](https://webpack.js.org/configuration/dev-server/#devserver-proxy).
 
-As angularjs is not a real component approach, HMR (hot module replacement) is not supported and a component change apply a full reload of the page. However it' works with CSS, so you can change it without loosing the state of your app :)
+As angularjs is not a real component approach, HMR (hot module replacement) is not supported and a component change apply a full reload of the page. However it works with CSS, so you can change it without loosing the state of your app :)
 
 ## Build
 
@@ -145,7 +139,7 @@ As angularjs is not a real component approach, HMR (hot module replacement) is n
 
 Minimization could brake angular dependency injection. So a quick check is required :
 
-Install globally http-server : `npm install -g http-server`
+Install globally http-server : `npm i -g http-server`
 
 Run `http-server` in the root of the repo. It will run a micro node server to serve the index.html file and the bundle.
 

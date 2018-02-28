@@ -2,7 +2,6 @@ import angular from 'angular';
 import uirouter from '@uirouter/angularjs';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
-import './index.css';
 
 import service from './service';
 import home from './home/home';
