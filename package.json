@@ -2,7 +2,7 @@
   "name": "angularjs-webpack-simple",
   "description": "A simple boilerplate for angularjs using webapck and components",
   "version": "0.0.4",
-  "author": "Arnaud Barré <arnaudbarremn@gamail.com>",
+  "author": "Arnaud Barré <arnaudbarremn@gmail.com>",
   "license": "MIT",
   "scripts": {
     "start": "webpack-dev-server --mode development --open --hot",
@@ -41,6 +41,9 @@
   },
   "eslintConfig": {
     "extends": "airbnb-base",
+    "env": {
+      "browser": true
+    },
     "rules": {
       "no-param-reassign": [
         "error",

@@ -8,7 +8,7 @@ import home from './home/home';
 import header from './header/header';
 import page2 from './page2/page2';
 
-export default angular.module('awesome-app', [ngRoute])
+const app = angular.module('app', [ngRoute])
   .service('service', service)
   .component('home', home)
   .component('header', header)
@@ -23,3 +23,5 @@ export default angular.module('awesome-app', [ngRoute])
   .run(($rootScope) => {
     $rootScope.headerText = 'Hi from $rootScope';
   });
+
+angular.bootstrap(document, [app.name], { strictDi: true });
