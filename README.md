@@ -22,8 +22,7 @@ Create a new folder in src named newComponent with an .html, a .js and a .css fi
 import './newComponent.css'; // If needed, to be added in webpack bundle
 import template from './newComponent.html';
 
-// This heading is required for keep dependency injections after minimization (handle by babel-plugin-angularjs-annotate)
-/* @ngInject */
+/* @ngInject */ // Required to keep dependency injection after minification
 function controller($scope) {
   $scope.message = 'Hello';
   $scope.changeMessage = () => $scope.message = 'Hello world';
@@ -49,7 +48,7 @@ In index.js, add these two lines :
 // other imports
 import newComponent from './newComponent/newComponent';
 
-export default angular.module('awesome-app', [/* dependencies */])
+const app = angular.module('app', [/* dependencies */])
   // other components
   .component('newComponent', newComponent)
 ```
@@ -59,7 +58,7 @@ export default angular.module('awesome-app', [/* dependencies */])
 You can use it in other components or in index.html :
 
 ```html
-<!-- Note: props are evaluate as JS, so you can pass a variable -->
+<!-- props are evaluate as JS, so you can pass a variable -->
 <new-component message-from-parent="'Hi from parent !'"></new-component>
 ```
 
@@ -81,15 +80,20 @@ The angularjs $rootScope is very good way to get a store in our app. It's initia
 
 #### Create it
 
+We can use es6 classes to get a more Angular-style service
+
 ```javascript
-/* @ngInject */
-export default function ($http) {
-  this.getUser = id => $http.get(`myWebservice/users/${id}`);
+export default class NewService {
+  /* @ngInject */ // Required to keep dependency injection after minification
+  constructor($http) {
+    this.$http = $http;
+  }
+  
+  getUser(id) {
+    return this.$http.get(`myWebservice/users/${id}`);
+  }
 }
 ```
-Two things are important here to get the service working : 
-* Annotate the function with `/* @ngInject */`
-* Not use the arrow function syntax for the global function
 
 > If the service is used only by one component, you can put it in the component folder
 
@@ -101,7 +105,7 @@ In index.js, add these two lines :
 // other imports
 import newService from './newService';
 
-export default angular.module('awesome-app', [/* dependencies */])
+const app = angular.module('app', [/* dependencies */])
   // components
   .service('newService', newService)
 ```
