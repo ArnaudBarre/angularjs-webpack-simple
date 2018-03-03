@@ -4,6 +4,15 @@ module.exports = {
   },
   module: {
     rules: [
+      {
+        test: /\.js$/,
+        loader: 'eslint-loader',
+        enforce: 'pre',
+        exclude: /node_modules/,
+        options: {
+          emitWarning: true,
+        },
+      },
       { test: /\.js$/, loader: 'babel-loader', exclude: /node_modules/ },
       { test: /\.html$/, loader: 'html-loader' },
       { test: /\.css/, loader: 'style-loader!css-loader' },
@@ -17,5 +26,8 @@ module.exports = {
   devServer: {
     historyApiFallback: true,
     overlay: true,
+  },
+  performance: {
+    hints: false,
   },
 };

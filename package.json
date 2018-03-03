@@ -1,7 +1,7 @@
 {
   "name": "angularjs-webpack-simple",
   "description": "A simple boilerplate for angularjs using webapck and components",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "author": "Arnaud Barré <arnaudbarremn@gamail.com>",
   "license": "MIT",
   "scripts": {
@@ -30,6 +30,7 @@
     "css-loader": "^0.28.10",
     "eslint": "^4.18.1",
     "eslint-config-airbnb-base": "^12.1.0",
+    "eslint-loader": "^2.0.0",
     "eslint-plugin-import": "^2.9.0",
     "file-loader": "^1.1.10",
     "html-loader": "^0.5.5",
