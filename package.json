@@ -1,13 +1,14 @@
 {
   "name": "angularjs-webpack-simple",
   "description": "A simple boilerplate for angularjs using webapck and components",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "author": "Arnaud Barré <arnaudbarremn@gmail.com>",
   "license": "MIT",
   "scripts": {
     "start": "webpack-dev-server --mode development --open --hot",
     "build": "webpack --mode production",
-    "lint": "eslint --fix ./src webpack.config.js"
+    "test": "jest",
+    "lint": "eslint ./src webpack.config.js e2e.test.js"
   },
   "dependencies": {
     "angular": "^1.6.9",
@@ -32,15 +33,25 @@
     "eslint-config-airbnb-base": "^12.1.0",
     "eslint-loader": "^2.0.0",
     "eslint-plugin-import": "^2.9.0",
+    "eslint-plugin-jest": "^21.12.3",
     "file-loader": "^1.1.10",
     "html-loader": "^0.5.5",
+    "jest": "^22.4.2",
+    "puppeteer": "^1.1.1",
+    "serve": "^6.5.1",
     "style-loader": "^0.20.2",
     "webpack": "^4.0.1",
     "webpack-cli": "^2.0.9",
     "webpack-dev-server": "^3.1.0"
   },
   "eslintConfig": {
-    "extends": "airbnb-base",
+    "extends": [
+      "airbnb-base",
+      "plugin:jest/recommended"
+    ],
+    "plugins": [
+      "jest"
+    ],
     "env": {
       "browser": true
     },
