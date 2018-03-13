@@ -1,8 +1,6 @@
 import angular from 'angular';
 import ngRoute from 'angular-route';
 
-import 'bootstrap/dist/css/bootstrap.min.css';
-
 import service from './service';
 import home from './home/home';
 import header from './header/header';

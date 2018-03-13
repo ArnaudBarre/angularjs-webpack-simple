@@ -2,7 +2,7 @@
 
 ## Component approach
 
-These boilerplate is based on the component approach added in angularjs 1.5, a first step towards Angular2+.
+These boilerplate is based on the component approach added in AngularJS 1.5, a first step towards Angular.
 
 ## A new component
 
@@ -74,7 +74,7 @@ $routeProvider
 
 ## Communication between components
 
-The angularjs $rootScope is very good way to get a store in our app. It's initialized in the run block of index.js and the values can be accessed and changed in any controller.
+The AngularJS $rootScope is very good way to get a store in our app. It's initialized in the run block of index.js and the values can be accessed and changed in any controller.
 
 ## A new service
 
@@ -90,7 +90,7 @@ export default class NewService {
   }
   
   getUser(id) {
-    return this.$http.get(`myWebservice/users/${id}`);
+    return this.$http.get(`myWebService/users/${id}`);
   }
 }
 ```
@@ -127,19 +127,29 @@ The service can now be used in a controller. If a prop is needed to call the ser
 
 A change in index.html is not detected and you need to refresh the page manually. You can enable the detection by adding `watchContentBase: true` in devServer configs, but a change in any file cause a full reload.
 
-If you need to call a webservice, you can setup a proxy in the devServer configs. See [docs here](https://webpack.js.org/configuration/dev-server/#devserver-proxy).
+If you need to call a web service, you can setup a proxy in the devServer configs. See [docs here](https://webpack.js.org/configuration/dev-server/#devserver-proxy).
 
-As angularjs is not a real component approach, HMR (hot module replacement) is not supported and a component change apply a full reload of the page. However it works with CSS, so you can change it without loosing the state of your app :)
+As AngularJS is not a real component approach, HMR (hot module replacement) is not supported and a component change apply a full reload of the page. However it works with CSS, so you can change it without loosing the state of your app :)
 
 ## Build
 
 `npm run build`
 
-Minimization could brake angular dependency injection. So a quick check is required :
+Minimization could brake angular dependency injection. So a quick check is required : use `npm run serve` to serve the index.html file and the bundle.
 
-Install globally http-server : `npm i -g http-server`
+## Unit tests
 
-Run `http-server` in the root of the repo. It will run a micro node server to serve the index.html file and the bundle.
+WIP
+
+## End-to-end tests
+
+`npm run e2e`
+
+End-to-end tests run on Chromium with [Puppeteer](https://github.com/GoogleChrome/puppeteer). It can be headless or not (`HEADLESS=false npm run e2e`). [See the API](https://github.com/GoogleChrome/puppeteer/blob/master/docs/api.md#).
+
+## Lint
+
+Eslint is used and extend [the Airbnb style](https://github.com/airbnb/javascript). It prevents from some mistakes (undef or unused variables) and help to keep a clean git history (comma-dangle, eol-last, ...). The configuration is in the package.json file. `npm run lint` will run eslint on all source files and automatically fix most problems.
 
 ## Inspiration
 
