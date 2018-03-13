@@ -1,6 +1,6 @@
 {
   "name": "angularjs-webpack-simple",
-  "description": "A simple boilerplate for angularjs using webapck and components",
+  "description": "A simple boilerplate for AngularJS using webpack and components",
   "version": "0.0.6",
   "author": "Arnaud Barré <arnaudbarremn@gmail.com>",
   "license": "MIT",
