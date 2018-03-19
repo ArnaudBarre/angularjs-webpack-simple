@@ -123,14 +123,6 @@ The service can now be used in a controller. If a prop is needed to call the ser
   };
 ```
 
-## Webpack tips
-
-A change in index.html is not detected and you need to refresh the page manually. You can enable the detection by adding `watchContentBase: true` in devServer configs, but a change in any file cause a full reload.
-
-If you need to call a web service, you can setup a proxy in the devServer configs. See [docs here](https://webpack.js.org/configuration/dev-server/#devserver-proxy).
-
-As AngularJS is not a real component approach, HMR (hot module replacement) is not supported and a component change apply a full reload of the page. However it works with CSS, so you can change it without loosing the state of your app :)
-
 ## Build
 
 `npm run build`
@@ -139,7 +131,9 @@ Minimization could brake angular dependency injection. So a quick check is requi
 
 ## Unit tests
 
-WIP
+`npm test`
+
+Make isolated test in AngularJS is complicated and require often some specific mocks, not really the best for a further migration. A way to create independent and easy to write tests is to put the logic in separate functions and test these functions. It also force to write pure and reusable functions. [Jest](https://facebook.github.io/jest/) is used as test-runner, assertion library and mock library. A good practice is to put test files in the component folder with the .spec.js extension. fileMock.js is used to not brake Jest with assets imports.
 
 ## End-to-end tests
 
@@ -150,6 +144,12 @@ End-to-end tests run on Chromium with [Puppeteer](https://github.com/GoogleChrom
 ## Lint
 
 Eslint is used and extend [the Airbnb style](https://github.com/airbnb/javascript). It prevents from some mistakes (undef or unused variables) and help to keep a clean git history (comma-dangle, eol-last, ...). The configuration is in the package.json file. `npm run lint` will run eslint on all source files and automatically fix most problems.
+
+## Webpack tips
+
+A change in index.html is not detected and you need to refresh the page manually. You can enable the detection by adding `watchContentBase: true` in devServer configs, but a change in any file (like ReadMe) causes a full reload.
+
+If you need to call a web service, you can setup a proxy in the [devServer configs](https://webpack.js.org/configuration/dev-server/#devserver-proxy).
 
 ## Inspiration
 
