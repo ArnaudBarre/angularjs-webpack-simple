@@ -3,6 +3,6 @@ module.exports = {
     headless: process.env.HEADLESS !== 'false',
   },
   server: {
-    command: 'npm run serve',
+    command: 'serve -p 4444 --single',
   },
 };

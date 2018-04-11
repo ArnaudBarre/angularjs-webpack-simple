@@ -1,5 +1,5 @@
 beforeAll(async () => {
-  await page.goto('http://localhost:8080/page2');
+  await page.goto('http://localhost:4444/page2');
 });
 
 it('should change header', async () => {

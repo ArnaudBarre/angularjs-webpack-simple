@@ -137,9 +137,11 @@ Make isolated test in AngularJS is complicated and require often some specific m
 
 ## End-to-end tests
 
-`npm run e2e`
+`npm run build` && `npm run e2e`
 
 End-to-end tests run on Chromium with [Puppeteer](https://github.com/GoogleChrome/puppeteer). It can be headless or not (`HEADLESS=false npm run e2e`). [See the API](https://github.com/GoogleChrome/puppeteer/blob/master/docs/api.md#).
+
+They run against your built sources, served on local server ([serve](https://github.com/zeit/serve)).
 
 ## Lint
 
