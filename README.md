@@ -48,7 +48,7 @@ const bindings = {
 };
 
 // Export of the component
-export default {controller: NewComponent, template, bindings};
+export default { controller: NewComponent, template, bindings };
  ```
 
 #### Register it
@@ -61,7 +61,7 @@ import newComponent from './newComponent/newComponent';
 
 const mainModule = angular.module('mainModule', [/* dependencies */])
   // other components
-  .component('newComponent', newComponent)
+  .component('appNewComponent', newComponent)
 ```
 
 #### Use it
@@ -70,7 +70,7 @@ You can use it in other components or in index.html :
 
 ```html
 <!-- props are evaluate as JS, so you can pass a variable -->
-<new-component message-from-parent="'Hi from parent !'"></new-component>
+<app-new-component message-from-parent="'Hi from parent !'"></app-new-component>
 ```
 
 or as the main component of a route : 
@@ -79,7 +79,7 @@ or as the main component of a route :
 $routeProvider
   // other routes
   .when('/newRoute', { 
-    template: '<new-component message-from-parent="\'Hi from router 🤗\'"></new-component>'
+    template: '<app-new-component message-from-parent="\'Hi from router 🤗\'"></app-new-component>'
   })
 ```
 

@@ -3,7 +3,7 @@ beforeAll(async () => {
 });
 
 it('should exclaim on click', async () => {
-  await page.click('home button');
-  const text = await page.$eval('home h2', el => el.innerHTML);
+  await page.click('app-home button');
+  const text = await page.$eval('app-home h2', el => el.innerHTML);
   expect(text).toContain('!');
 });

@@ -15,7 +15,7 @@ export class App {
 
 export default {
   template: `
-   <header user="$ctrl.$rootScope.user" text="$ctrl.$rootScope.headerText"></header>
+   <app-header user="$ctrl.$rootScope.user" text="$ctrl.$rootScope.headerText"></app-header>
    <ng-view></ng-view>
   `,
   controller: App,

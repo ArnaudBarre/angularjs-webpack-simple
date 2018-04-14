@@ -3,7 +3,7 @@ beforeAll(async () => {
 });
 
 it('should change header', async () => {
-  await page.click('page-2 button');
-  const text = await page.$eval('header', el => el.innerHTML);
+  await page.click('app-page-2 button');
+  const text = await page.$eval('app-header', el => el.innerHTML);
   expect(text.toLowerCase()).toContain('awesome');
 });
