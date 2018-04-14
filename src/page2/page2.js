@@ -1,16 +1,14 @@
 import template from './page2.html';
 
-/* @ngInject */
-function controller($scope, $rootScope, service) {
-  $scope.changeHeader = () => {
-    $rootScope.headerText = 'AngularJS is awesome !';
-  };
+export class Page2 {
+  /* @ngInject */
+  constructor($rootScope) {
+    this.$rootScope = $rootScope;
+  }
 
-  service.getTitle().then((title) => {
-    $scope.title = title;
-  }).catch(() => {
-    $scope.title = 'An error occurred';
-  });
+  changeHeader() {
+    this.$rootScope.headerText = 'AngularJS is awesome !';
+  }
 }
 
-export default { controller, template, controllerAs: 'props' };
+export default { controller: Page2, template };

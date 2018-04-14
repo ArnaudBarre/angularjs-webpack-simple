@@ -1,7 +1,8 @@
 module.exports = {
-  launch: {
-    headless: process.env.HEADLESS !== 'false',
-  },
+  launch: process.env.debug ? {
+    headless: false,
+    slowMo: 250,
+  } : {},
   server: {
     command: 'serve -p 4444 --single',
   },

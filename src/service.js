@@ -1,10 +1,14 @@
 export default class Service {
   /* @ngInject */
-  constructor($timeout) {
-    this.$timeout = $timeout;
+  constructor($http) {
+    this.$http = $http;
   }
 
-  getTitle() {
-    return this.$timeout(() => 'Welcome to page 2 !', 1000);
+  getUser() {
+    return this.$http.get('api/user');
   }
 }
+
+export const ServiceMock = () => ({
+  getUser: jest.fn().mockResolvedValue({ data: { name: 'Test' } }),
+});

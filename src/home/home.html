@@ -1,5 +1,5 @@
 <div class="jumbotron">
-  <h2 class="text-danger">{{message}}</h2>
-  <h4>{{props.messageFromParent}}</h4>
-  <button class="btn btn-danger" ng-click="changeMessage()">Change !</button>
+  <h2 class="text-danger">{{$ctrl.message}}</h2>
+  <h4>{{$ctrl.messageFromParent}}</h4>
+  <button class="btn btn-danger" ng-click="$ctrl.changeMessage()">Change !</button>
 </div>

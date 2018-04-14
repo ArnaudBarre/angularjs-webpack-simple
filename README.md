@@ -12,32 +12,43 @@ Create a new folder in src named newComponent with an .html, a .js and a .css fi
 
 ```html
 <div class="jumbotron">
-  <h1 class="text-primary">{{message}}</h1>
-  <h3>{{props.messageFromParent}}</h3>
+  <h1 class="text-primary">{{$ctrl.message}}</h1>
+  <h3>{{$ctrl.messageFromParent}}</h3>
 </div>
-<button class="btn btn-primary" ng-click="changeMessage()">Change</button>
+<button class="btn btn-primary" ng-click="$ctrl.changeMessage()">Change</button>
 ```
 
 ```javascript
 import './newComponent.css'; // If needed, to be added in webpack bundle
 import template from './newComponent.html';
 
-/* @ngInject */ // Required to keep dependency injection after minification
-function controller($scope) {
-  $scope.message = 'Hello';
-  $scope.changeMessage = () => $scope.message = 'Hello world';
+export class NewComponent {
+  /* @ngInject */ // Required to keep dependency injection after minification
+  constructor(service) {
+    this.message = '';
+    this.service = service;
+  }
+
+  $onInit() {
+    // this.messageFromParent available
+  }
+
+  getMessage() {
+    this.message = this.service.getMessage();
+  }
 }
 
-/* Properties that can be passed from parent
+/* Properties that can be bind to the controller
   '=' : Two-way data-binding : A change in child will reflect in parent
   '<' : One-way data-binding : A change in child will NOT reflect in parent
+  Be careful, these values are not available in constructor
 */
-const props = {
+const bindings = {
   messageFromParent: '<',
 };
 
 // Export of the component
-export default {controller, template, binding: props, controllerAs: 'props'};
+export default {controller: NewComponent, template, bindings};
  ```
 
 #### Register it
@@ -48,7 +59,7 @@ In index.js, add these two lines :
 // other imports
 import newComponent from './newComponent/newComponent';
 
-const app = angular.module('app', [/* dependencies */])
+const mainModule = angular.module('mainModule', [/* dependencies */])
   // other components
   .component('newComponent', newComponent)
 ```
@@ -68,19 +79,17 @@ or as the main component of a route :
 $routeProvider
   // other routes
   .when('/newRoute', { 
-    template: '<new-component message-from-parent="\'Hi from router :)\'"></new-component>'
+    template: '<new-component message-from-parent="\'Hi from router 🤗\'"></new-component>'
   })
 ```
 
 ## Communication between components
 
-The AngularJS $rootScope is very good way to get a store in our app. It's initialized in the run block of index.js and the values can be accessed and changed in any controller.
+The AngularJS $rootScope is very good way to get a store in our app. It's initialized in the app.js and the values can be accessed and changed in any controller.
 
 ## A new service
 
 #### Create it
-
-We can use es6 classes to get a more Angular-style service
 
 ```javascript
 export default class NewService {
@@ -90,7 +99,7 @@ export default class NewService {
   }
   
   getUser(id) {
-    return this.$http.get(`myWebService/users/${id}`);
+    return this.$http.get(`api/users/${id}`);
   }
 }
 ```
@@ -105,54 +114,49 @@ In index.js, add these two lines :
 // other imports
 import newService from './newService';
 
-const app = angular.module('app', [/* dependencies */])
+const mainModule = angular.module('mainModule', [/* dependencies */])
   // components
   .service('newService', newService)
 ```
 
 #### Use it
 
-The service can now be used in a controller. If a prop is needed to call the service, put the call in the $onInit method :
+The service can now be used in a controller.
 
 ```javascript
- this.$onInit = () => {
-    service.getUser($scope.props.userId)
-      .then((user) => {
-        $scope.user = user;
-      });
-  };
+$onInit() {
+  this.service.getUser(this.userId).then(({ data }) => {
+    this.user = data;
+  });
+}
 ```
 
 ## Build
 
 `npm run build`
 
-Minimization could brake angular dependency injection. So a quick check is required : use `npm run serve` to serve the index.html file and the bundle.
-
 ## Unit tests
 
 `npm test`
 
-Make isolated test in AngularJS is complicated and require often some specific mocks, not really the best for a further migration. A way to create independent and easy to write tests is to put the logic in separate functions and test these functions. It also force to write pure and reusable functions. [Jest](https://facebook.github.io/jest/) is used as test-runner, assertion library and mock library. A good practice is to put test files in the component folder with the .spec.js extension. fileMock.js is used to not brake Jest with assets imports.
+[Jest](https://facebook.github.io/jest/) is used as test-runner, assertion library and mock library. A good practice is to put test files in the component folder with the .spec.js extension. 
+
+fileMock.js is used to not brake Jest with assets imports.
 
 ## End-to-end tests
 
-`npm run build` && `npm run e2e`
+`npm run e2e`
 
-End-to-end tests run on Chromium with [Puppeteer](https://github.com/GoogleChrome/puppeteer). It can be headless or not (`HEADLESS=false npm run e2e`). [See the API](https://github.com/GoogleChrome/puppeteer/blob/master/docs/api.md#).
+End-to-end tests run on Chromium with [Puppeteer](https://github.com/GoogleChrome/puppeteer). It can be headless or not (`npm run e2e:debug`).
 
-They run against your built sources, served on local server ([serve](https://github.com/zeit/serve)).
+They run against built sources, served with [serve](https://github.com/zeit/serve).
 
 ## Lint
 
-Eslint is used and extend [the Airbnb style](https://github.com/airbnb/javascript). It prevents from some mistakes (undef or unused variables) and help to keep a clean git history (comma-dangle, eol-last, ...). The configuration is in the package.json file. `npm run lint` will run eslint on all source files and automatically fix most problems.
+`npm run lint`
 
-## Webpack tips
+ESLint is used and extend [the Airbnb style](https://github.com/airbnb/javascript). It prevents from some mistakes (undef or unused variables) and help to keep a clean git history (comma-dangle, eol-last, ...). The configuration is in the package.json file. `npm run lint` will run eslint on all source files and automatically fix most problems.
 
-A change in index.html is not detected and you need to refresh the page manually. You can enable the detection by adding `watchContentBase: true` in devServer configs, but a change in any file (like ReadMe) causes a full reload.
+## Proxy
 
-If you need to call a web service, you can setup a proxy in the [devServer configs](https://webpack.js.org/configuration/dev-server/#devserver-proxy).
-
-## Inspiration
-
-This boilerplate is heavily inspired from [vuejs-templates/webpack-simple](https://github.com/vuejs-templates/webpack-simple)
+You can use the [devserver-proxy](https://webpack.js.org/configuration/dev-server/#devserver-proxy) to either redirect to another port (```target: 'http://localhost:3000'```) or mock data with the bypass function.

@@ -26,6 +26,13 @@ module.exports = {
   devServer: {
     historyApiFallback: true,
     overlay: true,
+    proxy: {
+      '/api': {
+        bypass: (req, res) => {
+          if (req.url.includes('user')) res.send({ name: 'toto' });
+        },
+      },
+    },
   },
   performance: {
     hints: false,

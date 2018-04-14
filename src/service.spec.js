@@ -1,13 +1,16 @@
 import Service from './service';
 
 let service;
-const timeoutSpy = jest.fn();
+let httpMock;
 
-beforeAll(() => {
-  service = new Service(timeoutSpy);
+beforeEach(() => {
+  httpMock = {
+    get: jest.fn(),
+  };
+  service = new Service(httpMock);
 });
 
-it('should use $timeout', () => {
-  service.getTitle();
-  expect(timeoutSpy.mock.calls).toHaveLength(1);
+it('should call $http.get', () => {
+  service.getUser();
+  expect(httpMock.get).toHaveBeenCalledTimes(1);
 });

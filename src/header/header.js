@@ -1,8 +1,9 @@
 import template from './header.html';
 import './header.css';
 
-const props = {
+const bindings = {
   text: '<',
+  user: '<',
 };
 
-export default { template, bindings: props, controllerAs: 'props' };
+export default { template, bindings };

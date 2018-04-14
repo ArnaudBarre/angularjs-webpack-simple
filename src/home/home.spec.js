@@ -1,11 +1,12 @@
-import { dummyChangeMessage } from './home';
+import { Home } from './home';
 
-const testString = 'Hi form test';
+let home;
 
-test('dummyChangeMessage should remove name', () => {
-  expect(dummyChangeMessage(testString)).not.toContain('test');
+beforeEach(() => {
+  home = new Home();
 });
 
-test('dummyChangeMessage should add \'!\'', () => {
-  expect(dummyChangeMessage(testString)).toContain('!');
+test('change message should remove name', () => {
+  home.changeMessage();
+  expect(home.message).toContain('!');
 });

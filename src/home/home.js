@@ -1,24 +1,18 @@
 import template from './home.html';
 
-export const dummyChangeMessage = (message) => {
-  const parts = message.split(' ');
-  parts[parts.length - 1] = 'external function';
-  parts.push('!');
-  return parts.join(' ');
-};
+export class Home {
+  /* @ngInject */
+  constructor() {
+    this.message = 'Hi from constructor';
+  }
 
-/* @ngInject */
-function controller($scope) {
-  $scope.message = 'Hi from $scope';
-  $scope.changeMessage = () => {
-    $scope.message = dummyChangeMessage($scope.message);
-  };
+  changeMessage() {
+    this.message = `${this.message} !`;
+  }
 }
 
-const props = {
+const bindings = {
   messageFromParent: '<',
 };
 
-export default {
-  controller, template, bindings: props, controllerAs: 'props',
-};
+export default { controller: Home, template, bindings };
