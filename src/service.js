@@ -8,7 +8,3 @@ export default class Service {
     return this.$http.get('api/user');
   }
 }
-
-export const ServiceMock = () => ({
-  getUser: jest.fn().mockResolvedValue({ data: { name: 'Test' } }),
-});

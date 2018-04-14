@@ -1,7 +1,7 @@
 {
   "name": "angularjs-webpack-simple",
   "description": "A simple boilerplate for AngularJS using webpack and components",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "author": "Arnaud Barré <arnaudbarremn@gmail.com>",
   "license": "MIT",
   "scripts": {
@@ -49,7 +49,7 @@
   },
   "jest": {
     "moduleNameMapper": {
-      "\\.(jpg|jpeg|png|gif|svg|css|html)$": "<rootDir>//fileMock.js"
+      "\\.(jpg|jpeg|png|gif|svg|css|html)$": "<rootDir>//__mocks__/asset.js"
     }
   },
   "eslintConfig": {

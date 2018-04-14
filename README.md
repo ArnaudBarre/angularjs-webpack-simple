@@ -139,9 +139,7 @@ $onInit() {
 
 `npm test`
 
-[Jest](https://facebook.github.io/jest/) is used as test-runner, assertion library and mock library. A good practice is to put test files in the component folder with the .spec.js extension. 
-
-fileMock.js is used to not brake Jest with assets imports.
+[Jest](https://facebook.github.io/jest/) is used as test-runner, assertion library and mock library. A good practice is to put test files in the component folder with the .spec.js extension.
 
 ## End-to-end tests
 

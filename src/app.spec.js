@@ -1,15 +1,17 @@
 import { App } from './app';
-import { ServiceMock } from './service';
+import ServiceMock from '../__mocks__/service';
 
 let app;
-let serviceMock;
 
 beforeEach(() => {
-  serviceMock = ServiceMock();
-  app = new App(jest.fn(), serviceMock);
+  app = new App(jest.fn(), new ServiceMock());
   app.$onInit();
 });
 
 test('it should call getUser on init', () => {
-  expect(serviceMock.getUser).toHaveBeenCalledTimes(1);
+  expect(app.service.getUser).toHaveBeenCalledTimes(1);
+});
+
+test('it should set user in $rootScope', () => {
+  expect(app.$rootScope).toHaveProperty('user');
 });
