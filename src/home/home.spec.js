@@ -6,7 +6,7 @@ beforeEach(() => {
   home = new Home();
 });
 
-test('change message should remove name', () => {
+it('should change message should remove name', () => {
   home.changeMessage();
   expect(home.message).toContain('!');
 });

@@ -8,10 +8,10 @@ beforeEach(() => {
   app.$onInit();
 });
 
-test('it should call getUser on init', () => {
+it('should call getUser on init', () => {
   expect(app.service.getUser).toHaveBeenCalledTimes(1);
 });
 
-test('it should set user in $rootScope', () => {
+it('should set user in $rootScope', () => {
   expect(app.$rootScope).toHaveProperty('user');
 });

@@ -5,5 +5,6 @@ module.exports = {
   } : {},
   server: {
     command: 'serve -p 4444 --single',
+    port: 4444,
   },
 };

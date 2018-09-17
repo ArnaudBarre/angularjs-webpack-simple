@@ -1,5 +1,4 @@
 import angular from 'angular';
-import 'babel-polyfill';
 import ngRoute from 'angular-route';
 
 import service from './service';

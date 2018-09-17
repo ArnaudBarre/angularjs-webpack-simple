@@ -8,7 +8,7 @@ beforeEach(() => {
   page2 = new Page2(rootScopeSpy);
 });
 
-test('should set headerText of rootScope on changeHeader', () => {
+it('should set headerText of rootScope on changeHeader', () => {
   page2.changeHeader();
   expect(rootScopeSpy).toHaveProperty('headerText');
 });
