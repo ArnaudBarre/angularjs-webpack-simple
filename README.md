@@ -147,7 +147,7 @@ $onInit() {
 
 End-to-end tests run on Chromium with [Puppeteer](https://github.com/GoogleChrome/puppeteer). It can be headless or not (`npm run e2e:debug`).
 
-They run against built sources, served with [serve](https://github.com/zeit/serve).
+They run in parallels in different tabs against built sources, served with [serve](https://github.com/zeit/serve).
 
 ## Lint
 

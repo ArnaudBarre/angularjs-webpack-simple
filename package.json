@@ -8,7 +8,7 @@
     "start": "webpack-dev-server --mode development --open --hot",
     "build": "webpack --mode production",
     "test": "jest",
-    "e2e": "npm run build && jest -c e2e.config.js --runInBand --detectOpenHandles",
+    "e2e": "npm run build && jest -c e2e.config.js --detectOpenHandles",
     "e2e:debug": "debug=true npm run e2e",
     "lint": "eslint ./src *.config.js --fix"
   },
